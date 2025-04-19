@@ -36,9 +36,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Page<MemberDto> getMembers(Pageable pageable) {
+    public Page<MemberSummaryDto> getMembers(Pageable pageable) {
         return memberRepository.findAllByIsDeletedFalse(pageable)
-                .map(MemberDto::new);
+                .map(MemberSummaryDto::new);
     }
 
     @Override
@@ -66,10 +66,9 @@ public class MemberServiceImpl implements MemberService {
 
     private Member updateFromDto(Member existing, MemberDto dto) {
         return new Member(
-                // Non-updatable fields (from existing)
                 existing.recordId(),
-                // Updatable fields (check dto for non-null)
                 dto.getBranchName() != null ? dto.getBranchName() : existing.branchName(),
+                existing.status(),
                 dto.getRegistrationDate() != null ? dto.getRegistrationDate() : existing.registrationDate(),
                 dto.getFirstName() != null ? dto.getFirstName() : existing.firstName(),
                 dto.getLastName() != null ? dto.getLastName() : existing.lastName(),
@@ -80,7 +79,6 @@ public class MemberServiceImpl implements MemberService {
                 dto.getResidingAddress() != null ? dto.getResidingAddress() : existing.residingAddress(),
                 dto.getPrimaryPhone() != null ? dto.getPrimaryPhone() : existing.primaryPhone(),
                 dto.getSecondaryPhone() != null ? dto.getSecondaryPhone() : existing.secondaryPhone(),
-                // Non-updatable: emailAddress
                 existing.emailAddress(),
                 dto.getOccupation() != null ? dto.getOccupation() : existing.occupation(),
                 dto.getEmployer() != null ? dto.getEmployer() : existing.employer(),
@@ -103,7 +101,6 @@ public class MemberServiceImpl implements MemberService {
                 dto.getMinistriesOfInterest() != null ? dto.getMinistriesOfInterest() : existing.ministriesOfInterest(),
                 dto.getSpiritualGifts() != null ? dto.getSpiritualGifts() : existing.spiritualGifts(),
                 dto.getSkills() != null ? dto.getSkills() : existing.skills(),
-                // Fields not in DTO (retain existing values)
                 existing.agreeWithBibleIsInspiredWord(),
                 existing.agreeWithSalvationThroughFaith(),
                 existing.agreeWithJesusSonOfGod(),
@@ -115,11 +112,8 @@ public class MemberServiceImpl implements MemberService {
                 existing.consentContactPermission(),
                 existing.consentPhotoUse(),
                 existing.consentSignatureDate(),
-                // SpecialNeeds is in DTO
                 dto.getSpecialNeeds() != null ? dto.getSpecialNeeds() : existing.specialNeeds(),
-                // howDidYouHear not in DTO
                 existing.howDidYouHear(),
-                // Non-updatable: isDeleted
                 existing.isDeleted()
         );
     }

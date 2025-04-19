@@ -11,6 +11,7 @@ import java.util.UUID;
 public record Member(
         UUID recordId,
         String branchName,
+        AttendanceStaus status,
         LocalDate registrationDate,
         String firstName,
         String lastName,
@@ -63,6 +64,7 @@ public record Member(
         this(
                 UUID.randomUUID(),
                 membershipRegistrationForm.branchName(),
+                AttendanceStaus.ACTIVE,
                 LocalDate.now(),
                 membershipRegistrationForm.firstName(),
                 membershipRegistrationForm.lastName(),
@@ -116,7 +118,7 @@ public record Member(
     // Helper method to update isDeleted
     public Member withIsDeleted(boolean isDeleted) {
         return new Member(
-                recordId, branchName, registrationDate, firstName, lastName, preferredName,
+                recordId, branchName, status, registrationDate, firstName, lastName, preferredName,
                 dateOfBirth, gender, maritalStatus, residingAddress, primaryPhone, secondaryPhone,
                 emailAddress, occupation, employer, spouseName, spousePhone, fatherName, fatherHometown,
                 fatherContact, motherName, motherHometown, motherContact, emergencyContactPhone,

@@ -33,7 +33,7 @@ public class MembersController {
     }
 
     @GetMapping
-    public Page<MemberDto> getAllMembers(
+    public Page<MemberSummaryDto> getAllMembers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         return memberService.getMembers(PageRequest.of(page, size));
