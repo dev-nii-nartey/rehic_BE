@@ -22,9 +22,9 @@ public class MembersController {
     private MemberService memberService;
 
     @PostMapping
-    public CustomResponses addMember(@RequestBody MembershipRegistrationForm memberRegistrationForm) {
-        MemberDto member = memberService.addMember(memberRegistrationForm);
-        return new CustomResponses(member.getFirstName());
+    public MemberSummaryDto addMember(@RequestBody MembershipRegistrationForm memberRegistrationForm) {
+        MemberSummaryDto member = memberService.addMember(memberRegistrationForm);
+        return member;
     }
 
     @GetMapping("/{email}")

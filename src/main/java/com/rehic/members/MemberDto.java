@@ -12,8 +12,6 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class MemberDto implements Serializable {
     private UUID recordId;
     private String branchName;

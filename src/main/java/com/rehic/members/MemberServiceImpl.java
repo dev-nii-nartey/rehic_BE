@@ -16,26 +16,24 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     @Override
-    public MemberDto addMember(MembershipRegistrationForm form) {
+    public MemberSummaryDto addMember(MembershipRegistrationForm form) {
         String email = form.emailAddress();
         return memberRepository.findById(email)
                 .map(existing -> {
-                    if (existing.isDeleted()) {
-                        Member reactivated = Member.builder()
-                                .fromRegistrationForm(form)
+                    if (existing.getIsDeleted()) {
+                        Member reactivated = Member.fromRegistrationForm(form)
                                 .isDeleted(false)
                                 .build();
-                        return new MemberDto(memberRepository.save(reactivated));
+                        return new MemberSummaryDto(memberRepository.save(reactivated));
                     } else {
                         throw new ResponseStatusException(HttpStatus.CONFLICT, "Member already exists");
                     }
                 })
                 .orElseGet(() -> {
-                    Member newMember = Member.builder()
-                            .fromRegistrationForm(form)
+                    Member newMember = Member.fromRegistrationForm(form)
                             .isDeleted(false)
                             .build();
-                    return new MemberDto(memberRepository.save(newMember));
+                    return new MemberSummaryDto(memberRepository.save(newMember));
                 });
     }
 
@@ -60,7 +58,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberDto updateMember(String email, MemberDto dto) {
         Member existing = memberRepository.findById(email)
-                .filter(m -> !m.isDeleted())
+                .filter(m -> !m.getIsDeleted())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
         Member updated = updateFromDto(existing, dto);
@@ -117,7 +115,7 @@ public class MemberServiceImpl implements MemberService {
                 .consentSignatureDate(existing.getConsentSignatureDate())
                 .specialNeeds(dto.getSpecialNeeds() != null ? dto.getSpecialNeeds() : existing.getSpecialNeeds())
                 .howDidYouHear(existing.getHowDidYouHear())
-                .isDeleted(existing.isDeleted())
+                .isDeleted(existing.getIsDeleted())
                 .build();
     }
 

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 
 public interface MemberService {
-    MemberDto addMember(MembershipRegistrationForm member);
+    MemberSummaryDto addMember(MembershipRegistrationForm member);
      Page<MemberSummaryDto> getMembers(Pageable pageable);
     MemberDto getMember(String email);
     MemberDto updateMember(String email, MemberDto dto);
