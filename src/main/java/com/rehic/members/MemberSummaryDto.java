@@ -19,11 +19,11 @@ public class MemberSummaryDto {
     private String status; // Add this field if it doesn't exist in Member entity
     
     public MemberSummaryDto(Member member) {
-        this.firstName = member.firstName();
-        this.lastName = member.lastName();
-        this.primaryPhone = member.primaryPhone();
-        this.dateJoinedChurch = member.dateJoinedChurch();
-        this.emailAddress = member.emailAddress();
+        this.firstName = member.getFirstName();
+        this.lastName = member.getLastName();
+        this.primaryPhone = member.getPrimaryPhone();
+        this.dateJoinedChurch = member.getDateJoinedChurch();
+        this.emailAddress = member.getEmailAddress();
         // Map status if needed
     }
 }
