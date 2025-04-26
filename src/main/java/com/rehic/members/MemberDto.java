@@ -1,6 +1,7 @@
 package com.rehic.members;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -52,42 +53,45 @@ public class MemberDto implements Serializable {
     private List<String> skills;
     // Additional Information
     private String specialNeeds;
+    private String howDidYouHear;
+
 
     public MemberDto(Member member) {
-        this.recordId = member.recordId();
-        this.branchName = member.branchName();
-        this.registrationDate = member.registrationDate();
-        this.firstName = member.firstName();
-        this.lastName = member.lastName();
-        this.preferredName = member.preferredName();
-        this.dateOfBirth = member.dateOfBirth();
-        this.gender = member.gender();
-        this.maritalStatus = member.maritalStatus();
-        this.residingAddress = member.residingAddress();
-        this.primaryPhone = member.primaryPhone();
-        this.secondaryPhone = member.secondaryPhone();
-        this.emailAddress = member.emailAddress();
-        this.occupation = member.occupation();
-        this.employer = member.employer();
-        this.spouseName = member.spouseName();
-        this.spousePhone = member.spousePhone();
-        this.fatherName = member.fatherName();
-        this.fatherHometown = member.fatherHometown();
-        this.fatherContact = member.fatherContact();
-        this.motherName = member.motherName();
-        this.motherHometown = member.motherHometown();
-        this.motherContact = member.motherContact();
-        this.emergencyContactPhone = member.emergencyContactPhone();
-        this.emergencyContactRelationship = member.emergencyContactRelationship();
-        this.dateJoinedChurch = member.dateJoinedChurch();
-        this.baptizedWithHolySpirit = member.baptizedWithHolySpirit();
-        this.dateOfSalvation = member.dateOfSalvation();
-        this.baptismDate = member.baptismDate();
-        this.previousChurchAffiliation = member.previousChurchAffiliation();
-        this.yearsAttended = member.yearsAttended();
-        this.ministriesOfInterest = member.ministriesOfInterest();
-        this.spiritualGifts = member.spiritualGifts();
-        this.skills = member.skills();
-        this.specialNeeds = member.specialNeeds();
+        this.recordId = member.getRecordId();
+        this.branchName = member.getBranchName();
+        this.registrationDate = member.getRegistrationDate();
+        this.firstName = member.getFirstName();
+        this.lastName = member.getLastName();
+        this.preferredName = member.getPreferredName();
+        this.dateOfBirth = member.getDateOfBirth();
+        this.gender = member.getGender();
+        this.maritalStatus = member.getMaritalStatus();
+        this.residingAddress = member.getResidingAddress();
+        this.primaryPhone = member.getPrimaryPhone();
+        this.secondaryPhone = member.getSecondaryPhone();
+        this.emailAddress = member.getEmailAddress();
+        this.occupation = member.getOccupation();
+        this.employer = member.getEmployer();
+        this.spouseName = member.getSpouseName();
+        this.spousePhone = member.getSpousePhone();
+        this.fatherName = member.getFatherName();
+        this.fatherHometown = member.getFatherHometown();
+        this.fatherContact = member.getFatherContact();
+        this.motherName = member.getMotherName();
+        this.motherHometown = member.getMotherHometown();
+        this.motherContact = member.getMotherContact();
+        this.emergencyContactPhone = member.getEmergencyContactPhone();
+        this.emergencyContactRelationship = member.getEmergencyContactRelationship();
+        this.dateJoinedChurch = member.getDateJoinedChurch();
+        this.baptizedWithHolySpirit = member.getBaptizedWithHolySpirit();
+        this.dateOfSalvation = member.getDateOfSalvation();
+        this.baptismDate = member.getBaptismDate();
+        this.previousChurchAffiliation = member.getPreviousChurchAffiliation();
+        this.yearsAttended = member.getYearsAttended();
+        this.ministriesOfInterest = member.getMinistriesOfInterest();
+        this.spiritualGifts = member.getSpiritualGifts();
+        this.skills = member.getSkills();
+        this.specialNeeds = member.getSpecialNeeds();
+        this.howDidYouHear = member.getHowDidYouHear();
     }
 }
