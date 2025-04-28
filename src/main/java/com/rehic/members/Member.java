@@ -14,10 +14,11 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 public class Member {
     @Builder.Default
+    @Id
     private final UUID recordId = UUID.randomUUID();
     private final String branchName;
     @Builder.Default
-    private final AttendanceStaus status = AttendanceStaus.ACTIVE;
+    private final AttendanceStaus attendanceStatus = AttendanceStaus.ACTIVE;
     @Builder.Default
     private final LocalDate registrationDate = LocalDate.now();
     private final String firstName;

@@ -15,7 +15,6 @@ import static org.springframework.data.web.config.EnableSpringDataWebSupport.Pag
 @RestController
 @RequestMapping("/api/v1/rehic/members")
 @AllArgsConstructor
-@Data
 @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)
 public class MembersController {
 

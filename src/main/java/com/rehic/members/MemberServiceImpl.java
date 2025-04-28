@@ -69,7 +69,7 @@ public class MemberServiceImpl implements MemberService {
         return Member.builder()
                 .recordId(existing.getRecordId())
                 .branchName(dto.getBranchName() != null ? dto.getBranchName() : existing.getBranchName())
-                .status(existing.getStatus())
+                .attendanceStatus(existing.getAttendanceStatus())
                 .registrationDate(dto.getRegistrationDate() != null ? dto.getRegistrationDate() : existing.getRegistrationDate())
                 .firstName(dto.getFirstName() != null ? dto.getFirstName() : existing.getFirstName())
                 .lastName(dto.getLastName() != null ? dto.getLastName() : existing.getLastName())
