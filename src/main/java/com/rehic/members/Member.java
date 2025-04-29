@@ -3,6 +3,7 @@ package com.rehic.members;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -30,7 +31,7 @@ public class Member {
     private final String residingAddress;
     private final String primaryPhone;
     private final String secondaryPhone;
-    @Id
+    @Indexed(unique = true)
     private final String emailAddress;
     private final String occupation;
     private final String employer;

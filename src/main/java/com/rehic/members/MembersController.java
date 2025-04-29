@@ -2,20 +2,18 @@ package com.rehic.members;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.web.bind.annotation.*;
 
 
-
-import static org.springframework.data.web.config.EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/rehic/members")
 @AllArgsConstructor
-@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)
+@EnableSpringDataWebSupport
 public class MembersController {
 
     private MemberService memberService;
@@ -25,9 +23,9 @@ public class MembersController {
         return memberService.addMember(memberRegistrationForm);
     }
 
-    @GetMapping("/{email}")
-    public MemberDto getMember(@PathVariable String email)  {
-        return memberService.getMember(email) ;
+    @GetMapping("/{id}")
+    public MemberDto getMember(@PathVariable UUID id)  {
+        return memberService.getMember(id) ;
     }
 
     @GetMapping
@@ -38,14 +36,14 @@ public class MembersController {
     }
 
 
-    @DeleteMapping("/{email}")
-    public void deleteMember(@PathVariable String email) {
-        memberService.deleteMember(email);
+    @DeleteMapping("/{id}")
+    public void deleteMember(@PathVariable UUID id) {
+        memberService.deleteMember(id);
     }
 
     @PutMapping
     public MemberDto updateMember( @RequestBody MemberDto dto) {
-        return memberService.updateMember(dto.getEmailAddress(), dto);
+        return memberService.updateMember(dto.getRecordId(), dto);
     }
 
 

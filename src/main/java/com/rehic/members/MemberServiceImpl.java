@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 @AllArgsConstructor
@@ -17,8 +19,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberSummaryDto addMember(MembershipRegistrationForm form) {
-        String email = form.emailAddress();
-        return memberRepository.findById(email)
+        String memberId = form.emailAddress();
+        return memberRepository.findById(memberId)
                 .map(existing -> {
                     if (existing.getIsDeleted()) {
                         Member reactivated = Member.fromRegistrationForm(form)
@@ -44,20 +46,20 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public MemberDto getMember(String email) {
-        return memberRepository.findById(email).map(MemberDto::new).orElse(null);
+    public MemberDto getMember(UUID recordId) {
+        return memberRepository.findById(recordId.toString()).map(MemberDto::new).orElse(null);
     }
 
     @Override
-    public void deleteMember(String email) {
-        Member member = memberRepository.findById(email)
+    public void deleteMember(UUID recordId) {
+        Member member = memberRepository.findById(recordId.toString())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         memberRepository.save(member.withIsDeleted(true));
     }
 
     @Override
-    public MemberDto updateMember(String email, MemberDto dto) {
-        Member existing = memberRepository.findById(email)
+    public MemberDto updateMember(UUID recordId, MemberDto dto) {
+        Member existing = memberRepository.findById(recordId.toString())
                 .filter(m -> !m.getIsDeleted())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
